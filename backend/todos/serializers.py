@@ -15,7 +15,6 @@ class TodoSerializer(serializers.ModelSerializer):
         model = Todo
 
     def get_tasks(self, obj):
-
         tasks = Task.objects.filter(todo_id=obj.id)
         serializer = TaskSerializer(tasks, many=True)
         return serializer.data
