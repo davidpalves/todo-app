@@ -8,12 +8,10 @@ class Todo(models.Model):
         on_delete=models.CASCADE,
         related_name='owner')
 
-    contributors = models.ForeignKey(
+    contributors = models.ManyToManyField(
         User,
-        on_delete=models.SET_NULL,
-        null=True,
         default=None,
-        related_name='contributors')
+        related_name='contributions')
 
     def __str__(self):
         return self.title
@@ -24,6 +22,12 @@ class Task(models.Model):
     description = models.TextField()
     deadline = models.DateTimeField()
     done = models.BooleanField(default=False)
+    responsible = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        default=None,
+        related_name='tasks')
     todo = models.ForeignKey(Todo, on_delete=models.CASCADE)
  
     def __str__(self):

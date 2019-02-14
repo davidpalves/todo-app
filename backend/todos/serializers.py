@@ -25,6 +25,7 @@ class TaskSerializer(serializers.ModelSerializer):
             'id',
             'title',
             'description',
+            'responsible',
             'deadline',
             'done',
             'todo'

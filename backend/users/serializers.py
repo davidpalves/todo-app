@@ -10,10 +10,13 @@ class UserSerializer(serializers.ModelSerializer):
     todos = serializers.SerializerMethodField()
 
     class Meta:
-        fields = ('id', 'username', 'email', 'todos')
+        fields = ('id', 'username', 'email', 'todos', 'tasks')
         model = User
 
     def get_todos(self, obj):
-        todos = Todo.objects.filter(Q(contributors_id=obj.id) | Q(owner_id=obj.id))
+        todos = Todo.objects.filter(Q(contributors__id=obj.id) | Q(owner_id=obj.id))
         serializer = TodoSerializer(todos, many=True)
         return serializer.data
+
+    def get_tasks(self, obj):
+        tasks = Task.objects.filter(responsible_id=obj.id)
