@@ -6,7 +6,7 @@ class Todo(models.Model):
     owner = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='owner')
+        related_name='owns')
 
     contributors = models.ManyToManyField(
         User,
