@@ -2,11 +2,13 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Todo(models.Model):
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, blank=False, default=None)
     owner = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='owns')
+        related_name='owns',
+        blank=False,
+        null=False)
 
     contributors = models.ManyToManyField(
         User,
@@ -18,17 +20,24 @@ class Todo(models.Model):
 
 
 class Task(models.Model):
-    title = models.CharField(max_length=140)
+    title = models.CharField(max_length=140, blank=False, default=None)
     description = models.TextField()
     deadline = models.DateTimeField()
-    done = models.BooleanField(default=False)
     responsible = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
+        blank=True,
         null=True,
         default=None,
         related_name='tasks')
-    todo = models.ForeignKey(Todo, on_delete=models.CASCADE)
+
+    todo = models.ForeignKey(
+        Todo,
+        on_delete=models.CASCADE,
+        blank=False,
+        null=False)
+    
+    done = models.BooleanField(default=False)
  
     def __str__(self):
         return self.title

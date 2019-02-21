@@ -31,4 +31,3 @@ class TaskSerializer(serializers.ModelSerializer):
             'todo'
         )
         model = Task
-    
