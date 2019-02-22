@@ -5,7 +5,7 @@ from .models import Todo, Task
 class TodoSerializer(serializers.ModelSerializer):
     tasks = serializers.SerializerMethodField()
     title = serializers.CharField(
-        allow_blank=False, required=True
+        max_length=200, allow_blank=False, required=True
     )
 
     class Meta:
@@ -24,6 +24,10 @@ class TodoSerializer(serializers.ModelSerializer):
 
 
 class TaskSerializer(serializers.ModelSerializer):
+    title = serializers.CharField(
+        max_length=140, allow_blank=False, required=True
+    )
+
     class Meta:
         fields = (
             'id',
