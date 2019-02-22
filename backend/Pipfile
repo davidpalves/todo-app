@@ -5,13 +5,15 @@ verify_ssl = true
 
 [dev-packages]
 flake8 = "*"
+v = {version = "*",editable = true}
+model-mommy = "*"
+coverage = "*"
 
 [packages]
 django = "==2.1.7"
 djangorestframework = "*"
 django-cors-headers = "*"
 djangorestframework-simplejwt = "*"
-coverage = "*"
 
 [requires]
 python_version = "3.6"

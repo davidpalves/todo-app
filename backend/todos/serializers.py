@@ -4,6 +4,7 @@ from .models import Todo, Task
 
 class TodoSerializer(serializers.ModelSerializer):
     tasks = serializers.SerializerMethodField()
+
     class Meta:
         fields = (
             'id',
@@ -18,6 +19,7 @@ class TodoSerializer(serializers.ModelSerializer):
         tasks = Task.objects.filter(todo_id=obj.id)
         serializer = TaskSerializer(tasks, many=True)
         return serializer.data
+
 
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:

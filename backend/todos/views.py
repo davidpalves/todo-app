@@ -4,7 +4,6 @@ from .serializers import TodoSerializer, TaskSerializer
 from django.db.models import Q
 
 
-
 class TodoViewSet(viewsets.ModelViewSet):
     serializer_class = TodoSerializer
 
@@ -14,7 +13,8 @@ class TodoViewSet(viewsets.ModelViewSet):
         todos = Todo.objects.filter(
             Q(contributors__id=user.id) | Q(owner_id=user.id))
 
-        return todos    
+        return todos
+
 
 class TaskViewSet(viewsets.ModelViewSet):
     queryset = Task.objects.all()

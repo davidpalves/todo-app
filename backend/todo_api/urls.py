@@ -21,8 +21,15 @@ from users.views import RegistrationAPI
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
-    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+
+    path('api/token/refresh/',
+         jwt_views.TokenRefreshView.as_view(),
+         name='token_refresh'),
+
+    path('api/token/',
+         jwt_views.TokenObtainPairView.as_view(),
+         name='token_obtain_pair'),
+
     path('api/', include('todos.urls')),
     path('users/', include('users.urls')),
     path('register/', RegistrationAPI.as_view(), name='registration')

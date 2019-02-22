@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from rest_framework import serializers
 from todos.models import Todo, Task
 from todos.serializers import TodoSerializer
 from django.db.models import Q
@@ -14,12 +13,14 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
 
     def get_todos(self, obj):
-        todos = Todo.objects.filter(Q(contributors__id=obj.id) | Q(owner_id=obj.id))
+        todos = Todo.objects.filter(
+            Q(contributors__id=obj.id) | Q(owner_id=obj.id))
         serializer = TodoSerializer(todos, many=True)
         return serializer.data
 
     def get_tasks(self, obj):
         tasks = Task.objects.filter(responsible_id=obj.id)
+        return tasks
 
 
 class CreateUserSerializer(serializers.ModelSerializer):
@@ -30,5 +31,3 @@ class CreateUserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return User.objects.create_user(**validated_data)
-        
-
