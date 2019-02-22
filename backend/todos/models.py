@@ -36,7 +36,8 @@ class Task(models.Model):
         Todo,
         on_delete=models.CASCADE,
         blank=False,
-        null=False)
+        null=False,
+        related_name='tasks')
 
     done = models.BooleanField(default=False)
 
