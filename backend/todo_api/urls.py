@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt import views as jwt_views
 from rest_framework.documentation import include_docs_urls
-from users.views import RegistrationAPI
+from users.views import RegistrationView
 
 
 urlpatterns = [
@@ -33,6 +33,6 @@ urlpatterns = [
 
     path('api/', include('todos.urls')),
     path('users/', include('users.urls')),
-    path('register/', RegistrationAPI.as_view(), name='registration'),
+    path('register/', RegistrationView.as_view(), name='registration'),
     path('docs/', include_docs_urls(title='Todo API'))
 ]

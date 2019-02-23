@@ -13,7 +13,7 @@ class TodoViewSet(viewsets.ModelViewSet):
             todos = Todo.objects.filter(
                 Q(owner_id=user.id) |
                 Q(contributors__id=user.id)
-                )
+                ).prefetch_related('tasks')
         else:
             todos = Todo.objects.none()
         return todos
@@ -33,7 +33,7 @@ class TaskViewSet(viewsets.ModelViewSet):
             tasks = Task.objects.filter(
                 Q(todo__owner_id=user.id) |
                 Q(todo__contributors__id=user.id)
-                )
+                ).select_related('todo', 'responsible')
         else:
             tasks = Task.objects.none()
         return tasks

@@ -11,7 +11,7 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 
-class RegistrationAPI(generics.GenericAPIView):
+class RegistrationView(generics.GenericAPIView):
     serializer_class = CreateUserSerializer
     permission_classes = (AllowAny,)
 
