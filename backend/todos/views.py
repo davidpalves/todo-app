@@ -9,10 +9,11 @@ class TodoViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-
-        todos = Todo.objects.filter(
-            Q(contributors__id=user.id) | Q(owner_id=user.id))
-
+        if user.id is not None:
+            todos = Todo.objects.filter(
+                Q(owner_id=user.id) |
+                Q(contributors__id=user.id)
+                )
         return todos
 
 

@@ -4,12 +4,14 @@ from .models import Todo, Task
 
 class TodoSerializer(serializers.ModelSerializer):
     tasks = serializers.SerializerMethodField()
+    owner = serializers.ReadOnlyField(source='owner.id')
     title = serializers.CharField(
         max_length=200, allow_blank=False, required=True
     )
 
     class Meta:
         fields = (
+            'id',
             'title',
             'owner',
             'contributors',

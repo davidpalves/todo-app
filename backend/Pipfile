@@ -14,6 +14,7 @@ django = "==2.1.7"
 djangorestframework = "*"
 django-cors-headers = "*"
 djangorestframework-simplejwt = "*"
+coreapi = "*"
 
 [requires]
 python_version = "3.6"

@@ -22,7 +22,7 @@ class TodoSerializerTests(TestCase):
         data = self.serializer.data
 
         self.assertEqual(set(data.keys()), set(
-            ['title', 'owner', 'contributors', 'tasks']))
+            ['id', 'title', 'owner', 'contributors', 'tasks']))
 
     def test_todo_serializer_with_data(self):
         data = {
@@ -82,3 +82,16 @@ class TaskSerializerTests(TestCase):
 
         serializer = serializers.TaskSerializer(data=data)
         self.assertTrue(serializer.is_valid())
+
+    def test_task_serializer_without_title(self):
+        data = {
+            'description': 'test description',
+            'deadline': timezone.now(),
+            'done': False,
+            'responsible': self.responsible.id,
+            'todo': self.todo.id
+        }
+
+        with self.assertRaises(ValidationError):
+            serializer = serializers.TaskSerializer(data=data)
+            serializer.is_valid(raise_exception=True)

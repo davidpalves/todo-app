@@ -16,21 +16,23 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt import views as jwt_views
+from rest_framework.documentation import include_docs_urls
 from users.views import RegistrationAPI
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('api/token/refresh/',
+    path('token/refresh/',
          jwt_views.TokenRefreshView.as_view(),
          name='token_refresh'),
 
-    path('api/token/',
+    path('token/',
          jwt_views.TokenObtainPairView.as_view(),
          name='token_obtain_pair'),
 
     path('api/', include('todos.urls')),
     path('users/', include('users.urls')),
-    path('register/', RegistrationAPI.as_view(), name='registration')
+    path('register/', RegistrationAPI.as_view(), name='registration'),
+    path('docs/', include_docs_urls(title='Todo API'))
 ]
