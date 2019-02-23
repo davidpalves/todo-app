@@ -14,7 +14,12 @@ class TodoViewSet(viewsets.ModelViewSet):
                 Q(owner_id=user.id) |
                 Q(contributors__id=user.id)
                 )
+        else:
+            todos = Todo.objects.none()
         return todos
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
 
 class TaskViewSet(viewsets.ModelViewSet):
