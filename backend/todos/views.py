@@ -25,3 +25,15 @@ class TodoViewSet(viewsets.ModelViewSet):
 class TaskViewSet(viewsets.ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+
+        if user.id is not None:
+            tasks = Task.objects.filter(
+                Q(todo__owner_id=user.id) |
+                Q(todo__contributors__id=user.id)
+                )
+        else:
+            tasks = Task.objects.none()
+        return tasks
