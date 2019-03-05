@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Todo = ({ title, description, deadline, status, responsible }) => (
+const Task = ({ title, description, deadline, status, responsible }) => (
     <li>
         <h3>{title}</h3> {" "}
         <small>
@@ -12,4 +12,4 @@ const Todo = ({ title, description, deadline, status, responsible }) => (
     </li>
 )
 
-export default Todo
+export default Task

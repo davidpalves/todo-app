@@ -1,18 +1,18 @@
 import React from 'react';
-import Todo from './Todo';
+import Task from './Task';
 
 
-const TodoList = ({ todos }) => (
+const TodoList = ({ tasks }) => (
 
     <ul>
         {
-            todos.map(todo => (
-                    <Todo
-                    title={todo.title}
-                    description={todo.description}
-                    deadline={todo.deadline}
-                    status= {todo.status}
-                    responsible={todo.responsible}
+            tasks.map(task => (
+                    <Task
+                    title={task.title}
+                    description={task.description}
+                    deadline={task.deadline}
+                    status= {task.status}
+                    responsible={task.responsible}
                     />
                 ))
         }
