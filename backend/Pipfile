@@ -10,11 +10,11 @@ model-mommy = "*"
 coverage = "*"
 
 [packages]
-django = "==2.1.7"
+django = "==2.2.4"
 djangorestframework = "*"
 django-cors-headers = "*"
 djangorestframework-simplejwt = "*"
 coreapi = "*"
 
 [requires]
-python_version = "3.6"
+python_version = "3.7.3"

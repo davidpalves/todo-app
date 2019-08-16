@@ -13,7 +13,8 @@ class Todo(models.Model):
 
     contributors = models.ManyToManyField(
         User,
-        default=None,
+        default=[],
+        blank=True,
         related_name='contributions')
 
     def __str__(self):
